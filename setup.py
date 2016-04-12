@@ -29,7 +29,7 @@ def read(fname):
 cache_git_tag()
 
 setup(
-    name='django-exacttarget',
+    name='django-exact-target',
     description="Integration between django and the SalesForce ExactTarget REST API",
     version=get_version(pypi=True),
     long_description=open('README.rst').read(),
@@ -50,7 +50,7 @@ setup(
     ],
     author='Craig Weber',
     author_email='crgwbr@gmail.com',
-    url='https://gitlab.com/thelabnyc/django-exacttarget',
+    url='https://gitlab.com/thelabnyc/django-exact-target',
     license='ISC',
     packages=packages,
     install_requires=requires,
