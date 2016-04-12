@@ -1,0 +1,5 @@
+test:
+  build: .
+  command: env
+  volumes:
+    - .:/code
