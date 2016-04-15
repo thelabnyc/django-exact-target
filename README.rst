@@ -2,7 +2,10 @@
 django-exact-target
 ===================
 
-This library serves as a connector between `django` and the `Exact Target REST API <https://code.exacttarget.com/apis-sdks/rest-api/v1/routes.html>`_.
+|  |kit| |format| |downloads|
+
+This library serves as a connector between `django` and the `Exact Target REST API <https://code.exacttarget.com/apis-sdks/rest-api/v1/routes.html>`_. It will support more of the API in the future, but currently only supports TriggeredSends.
+
 
 Installation
 ============
@@ -38,3 +41,12 @@ Changelog
 0.1.0
 ------------------
 - Initial release.
+
+.. |license| image:: https://img.shields.io/pypi/l/django-exact-target.svg
+    :target: https://pypi.python.org/pypi/django-exact-target
+.. |kit| image:: https://badge.fury.io/py/django-exact-target.svg
+    :target: https://pypi.python.org/pypi/django-exact-target
+.. |format| image:: https://img.shields.io/pypi/format/django-exact-target.svg
+    :target: https://pypi.python.org/pypi/django-exact-target
+.. |downloads| image:: https://img.shields.io/pypi/dm/django-exact-target.svg?maxAge=2592000
+    :target: https://pypi.python.org/pypi/django-exact-target
