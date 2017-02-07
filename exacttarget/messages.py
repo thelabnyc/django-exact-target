@@ -11,7 +11,7 @@ class TriggeredSend(object):
         self.token = token.CachedTokenGenerator()
 
 
-    def dispatch(self, email, attrs):
+    def dispatch(self, email, attrs, sync_request=True):
         url = '%s/key:%s/send' % (self.url_base, self.external_key)
         headers = self.token.headers()
         req_data = {
@@ -22,11 +22,9 @@ class TriggeredSend(object):
                     "SubscriberAttributes": attrs
                 },
             },
-            "OPTIONS": {
-                "RequestType": "SYNC"
-            },
         }
-
+        if sync_request:
+            req_data.update({"OPTIONS": {"RequestType": "SYNC"}})
         resp = requests.post(url, headers=headers, json=req_data)
         resp.raise_for_status()
         reply = resp.json()
