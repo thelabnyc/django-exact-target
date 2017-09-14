@@ -33,5 +33,13 @@ class TriggeredSend(object):
         for response in reply['responses']:
             if response['hasErrors']:
                 raven_client.captureMessage('Error occurred while submitting subscriber to exact target', extra=reply)
-                messages = response.get('messageErrors', [])
-                raise exceptions.TriggeredSendException(messages[0]['messageErrorStatus'] if len(messages) else 'Unknown TriggeredSend Error Occurred')
+                error_messages = response.get('messageErrors', [])
+                reg_messages = response.get('messages')
+                # sometimes there are structured errors
+                if len(error_messages):
+                    raise exceptions.TriggeredSendException(error_messages[0]['messageErrorStatus'])
+                # sometimes there are plain text errors
+                elif len(reg_messages):
+                    raise exceptions.TriggeredSendException(reg_messages[0])
+                else:
+                    raise exceptions.TriggeredSendException('Unknown TriggeredSend Error Occurred')
