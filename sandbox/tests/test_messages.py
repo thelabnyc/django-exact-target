@@ -1,5 +1,7 @@
 from django.core.cache import cache
-from django.test import TestCase
+from django.conf import settings
+from django.test import TestCase, override_settings
+
 import requests_mock
 import simplejson
 import mock
@@ -24,6 +26,7 @@ class BaseMessageTestMixin(BaseTokenTestMixin):
                         'hasErrors': has_errors,
                         'messageErrors': None if not has_errors else [
                             {
+                                'messageErrorCode': 42,
                                 'messageErrorStatus': 'Some error occurred'
                             }
                         ]
@@ -55,4 +58,13 @@ class TriggeredSendTest(BaseMessageTestMixin, TestCase):
         def dispatch():
             sender.dispatch('foo@example.com', { 'CampaignID': 'my-campaign-id' })
         self.assertRaises(exceptions.TriggeredSendException, dispatch)
+        self.assertEqual(respond.call_count, 1)
+
+    @override_settings(ET_IGNORED_ERROR_CODES=[42])
+    def test_ignore_error_whitelist(self, m):
+        print('testing with these ET_IGNORED_ERROR_CODES: ', settings.ET_IGNORED_ERROR_CODES)
+        respond = self.mock_response(m, has_errors=True)
+        sender = messages.TriggeredSend('my-external-key')
+        sender.dispatch('foo@example.com', { 'CampaignID': 'my-campaign-id' })
+        # no exception raised for ignored error code
         self.assertEqual(respond.call_count, 1)
