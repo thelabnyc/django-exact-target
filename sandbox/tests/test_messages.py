@@ -1,5 +1,4 @@
 from django.core.cache import cache
-from django.conf import settings
 from django.test import TestCase, override_settings
 
 import requests_mock
@@ -14,6 +13,7 @@ class BaseMessageTestMixin(BaseTokenTestMixin):
     def mock_response(self, m, has_errors=False):
         super().mock_response(m)
 
+        @override_settings(ET_IGNORED_ERROR_CODES=[42])
         def make_response(request, context):
             req = simplejson.loads(request.body)
             self.assertEqual(req['To']['Address'], 'foo@example.com')
@@ -60,9 +60,9 @@ class TriggeredSendTest(BaseMessageTestMixin, TestCase):
         self.assertRaises(exceptions.TriggeredSendException, dispatch)
         self.assertEqual(respond.call_count, 1)
 
-    @override_settings(ET_IGNORED_ERROR_CODES=[42])
     def test_ignore_error_whitelist(self, m):
-        print('testing with these ET_IGNORED_ERROR_CODES: ', settings.ET_IGNORED_ERROR_CODES)
+        from exacttarget import settings
+        settings.ET_IGNORED_ERROR_CODES=[42]
         respond = self.mock_response(m, has_errors=True)
         sender = messages.TriggeredSend('my-external-key')
         sender.dispatch('foo@example.com', { 'CampaignID': 'my-campaign-id' })

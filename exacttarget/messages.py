@@ -1,8 +1,9 @@
 import logging
-from django.conf import settings
 from raven.contrib.django.raven_compat.models import client as raven_client
 import requests
 from . import token, exceptions
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -41,10 +42,11 @@ class TriggeredSend(object):
                 # set of error codes in messages
                 error_codes = {err.get('messageErrorCode') for err in error_messages}
                 # coerce ET_IGNORED_ERROR_CODES into set
-                codes_to_ignore = set(getattr(settings, 'ET_IGNORED_ERROR_CODES', {}))
+                from . import settings
+                codes_to_ignore = set(settings.ET_IGNORED_ERROR_CODES)
 
                 # if response has any ignorable codes... set intersection
-                if codes_to_ignore & error_codes:
+                if len(codes_to_ignore & error_codes) > 0:
                     # log error, but don't send ignored error codes to raven
                     logger.warn("Suppressed exception for ET API exception. Error response: {}".format(reply))
                 else:
