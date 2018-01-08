@@ -46,7 +46,7 @@ Changelog
 0.1.2
 ----------------
 - optional errorcode whitelist
-  - Exactarget responses with error codes in ET_IGNORED_ERROR_CODES will not throw exceptions
+    - Exactarget responses with error codes in ET_IGNORED_ERROR_CODES will not throw exceptions
 
 
 0.1.1
