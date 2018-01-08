@@ -34,6 +34,11 @@ Dispatch a `TriggeredSend`. See also `message definition sends <https://code.exa
         "State": "IN"
     })
 
+Resources
+=========
+
+.. _ExactTarget API docs: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/18999.html
+
 
 Changelog
 =========
@@ -43,6 +48,14 @@ Changelog
 - Initial release.
 
 
+0.1.1
+-----------------
+- support for plaintext errors in responses
+
+
+0.1.2
+----------------
+- optional errorcode whitelist
 
 .. |license| image:: https://img.shields.io/pypi/l/django-exact-target.svg
     :target: https://pypi.python.org/pypi/django-exact-target
@@ -52,3 +65,4 @@ Changelog
     :target: https://pypi.python.org/pypi/django-exact-target
 .. |downloads| image:: https://img.shields.io/pypi/dm/django-exact-target.svg?maxAge=2592000
     :target: https://pypi.python.org/pypi/django-exact-target
+
