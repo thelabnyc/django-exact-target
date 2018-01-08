@@ -43,9 +43,10 @@ Resources
 Changelog
 =========
 
-0.1.0
-------------------
-- Initial release.
+0.1.2
+----------------
+- optional errorcode whitelist
+  - Exactarget responses with error codes in ET_IGNORED_ERROR_CODES will not throw exceptions
 
 
 0.1.1
@@ -53,9 +54,13 @@ Changelog
 - support for plaintext errors in responses
 
 
-0.1.2
-----------------
-- optional errorcode whitelist
+0.1.0
+------------------
+- Initial release.
+
+
+
+
 
 .. |license| image:: https://img.shields.io/pypi/l/django-exact-target.svg
     :target: https://pypi.python.org/pypi/django-exact-target
