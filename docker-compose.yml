@@ -1,5 +1,7 @@
-test:
-  build: .
-  command: env
-  volumes:
-    - .:/code
+version: '2'
+services:
+  test:
+    build: .
+    command: env
+    volumes:
+      - .:/code

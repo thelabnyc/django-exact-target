@@ -10,6 +10,7 @@ from exacttarget import token
 class BaseTokenTestMixin(object):
     def mock_response(self, m):
         data = { 'i': 0 }
+
         def make_response(request, context):
             req = simplejson.loads(request.body)
             self.assertEqual(req['clientId'], 'my-client-id')

@@ -38,7 +38,7 @@ class TokenGenerator(object):
 
 
 class CachedTokenGenerator(TokenGenerator):
-    tolerance = 10 # Cache the token for 10 seconds less than it's valid
+    tolerance = 10  # Cache the token for 10 seconds less than it's valid
 
     def _gen_key(self):
         return 'exacttarget_%s' % self.client_id

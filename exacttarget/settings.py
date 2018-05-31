@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from .constants import DEFAULT_IGNORED_CODES
 
+
 def overridable(name, default=None, required=False):
     if required:
         if not hasattr(settings, name) or not getattr(settings, name):

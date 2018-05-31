@@ -1,18 +1,20 @@
 stages:
   - test
 
+cache:
+  key: "$CI_PROJECT_NAME"
+  paths:
+    - $HOME/.cache/pip
+
 before_script:
-  - pip install -r requirements.txt
-  - export PYTHONPATH=`pwd`
+  - pip install tox
 
-test_python:3.4:
+test_python36:
   stage: test
-  image: python:3.4
-  script:
-    - ./test.sh
+  image: python:3.6
+  script: tox --skip-missing-interpreters
 
-test_python:3.5:
+test_pypy3:
   stage: test
-  image: python:3.5
-  script:
-    - ./test.sh
+  image: pypy:3-5
+  script: tox --skip-missing-interpreters

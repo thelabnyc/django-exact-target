@@ -1,30 +1,39 @@
-#!/usr/bin/env python
-import codecs
-import os.path
-from setuptools import setup
-from versiontag import get_version, cache_git_tag
+from setuptools import setup, Distribution
+
+Distribution().fetch_build_eggs('versiontag')
+
+from versiontag import get_version, cache_git_tag  # NOQA
+import codecs  # NOQA
+import os.path  # NOQA
 
 
 packages = [
     'exacttarget',
 ]
 
-setup_requires = [
-    'versiontag>=1.0.3',
-]
-
-requires = [
-    'Django>=1.8.11',
+install_requires = [
+    'Django>=1.11',
     'raven>=5.12.0',
     'requests>=2.9.1',
+    'simplejson>=3.8.2',
 ]
+
+extras_require = {
+    'development': [
+        'flake8>=3.2.1',
+        'requests_mock>=0.7.0',
+        'mock>=2.0.0',
+    ],
+}
 
 
 def fpath(name):
     return os.path.join(os.path.dirname(__file__), name)
 
+
 def read(fname):
     return codecs.open(fpath(fname), encoding='utf-8').read()
+
 
 cache_git_tag()
 
@@ -37,22 +46,16 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
-        'Operating System :: Unix',
-        'Operating System :: MacOS :: MacOS X',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     author='Craig Weber',
     author_email='crgwbr@gmail.com',
     url='https://gitlab.com/thelabnyc/django-exact-target',
     license='ISC',
     packages=packages,
-    install_requires=requires,
-    setup_requires=setup_requires
+    install_requires=install_requires,
+    extras_require=extras_require
 )

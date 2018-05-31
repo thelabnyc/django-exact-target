@@ -1,4 +1,3 @@
-from django.core.cache import cache
 from django.test import TestCase, override_settings
 
 import requests_mock
@@ -55,14 +54,16 @@ class TriggeredSendTest(BaseMessageTestMixin, TestCase):
     def test_dispatch_with_errors(self, m):
         respond = self.mock_response(m, has_errors=True)
         sender = messages.TriggeredSend('my-external-key')
+
         def dispatch():
             sender.dispatch('foo@example.com', { 'CampaignID': 'my-campaign-id' })
+
         self.assertRaises(exceptions.TriggeredSendException, dispatch)
         self.assertEqual(respond.call_count, 1)
 
     def test_ignore_error_whitelist(self, m):
         from exacttarget import settings
-        settings.ET_IGNORED_ERROR_CODES=[42]
+        settings.ET_IGNORED_ERROR_CODES = [42]
         respond = self.mock_response(m, has_errors=True)
         sender = messages.TriggeredSend('my-external-key')
         sender.dispatch('foo@example.com', { 'CampaignID': 'my-campaign-id' })
