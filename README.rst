@@ -43,6 +43,11 @@ Resources
 Changelog
 =========
 
+0.2.0
+----------------
+- Migrate from Sentry's old SDK (raven) to their new SDK (sentry-sdk).
+- Add support for Python 3.7.
+
 0.1.2
 ----------------
 - optional errorcode whitelist
