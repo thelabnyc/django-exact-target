@@ -13,7 +13,7 @@ packages = [
 
 install_requires = [
     'Django>=1.11',
-    'raven>=5.12.0',
+    'sentry-sdk>=0.5.5',
     'requests>=2.9.1',
     'simplejson>=3.8.2',
 ]

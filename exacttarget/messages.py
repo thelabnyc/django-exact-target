@@ -1,7 +1,7 @@
-import logging
-from raven.contrib.django.raven_compat.models import client as raven_client
-import requests
+from sentry_sdk import capture_message
 from . import token, exceptions
+import requests
+import logging
 
 
 
@@ -47,10 +47,10 @@ class TriggeredSend(object):
 
                 # if response has any ignorable codes... set intersection
                 if len(codes_to_ignore & error_codes) > 0:
-                    # log error, but don't send ignored error codes to raven
+                    # log error, but don't send ignored error codes to Sentry
                     logger.warn("Suppressed exception for ET API exception. Error response: {}".format(reply))
                 else:
-                    raven_client.captureMessage('Error occurred while submitting subscriber to exact target', extra=reply)
+                    capture_message('Error occurred while submitting subscriber to exact target', extra=reply)
                     reg_messages = response.get('messages')
                     # sometimes there are structured errors
                     if len(error_messages):
