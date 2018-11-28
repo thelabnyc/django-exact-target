@@ -1,7 +1,7 @@
-from sentry_sdk import capture_message
 from . import token, exceptions
 import requests
 import logging
+import sentry_sdk
 
 
 
@@ -36,6 +36,8 @@ class TriggeredSend(object):
         resp = requests.post(url, headers=headers, json=req_data)
         resp.raise_for_status()
         reply = resp.json()
+        with sentry_sdk.configure_scope() as scope:
+            scope.set_extra("reply_data", reply)
         for response in reply['responses']:
             if response['hasErrors']:
                 error_messages = response.get('messageErrors', [])
@@ -50,7 +52,7 @@ class TriggeredSend(object):
                     # log error, but don't send ignored error codes to Sentry
                     logger.warn("Suppressed exception for ET API exception. Error response: {}".format(reply))
                 else:
-                    capture_message('Error occurred while submitting subscriber to exact target', extra=reply)
+                    sentry_sdk.capture_message('Error occurred while submitting subscriber to exact target')
                     reg_messages = response.get('messages')
                     # sometimes there are structured errors
                     if len(error_messages):
