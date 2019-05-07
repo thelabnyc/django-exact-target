@@ -15,18 +15,18 @@ test_python36:
   image: python:3.6
   script:
     - pip install tox
-    - tox --skip-missing-interpreters
+    - tox -e 'py36-django{111,200,210,220}'
 
 test_python37:
   stage: test
   image: python:3.7
   script:
     - pip install tox
-    - tox --skip-missing-interpreters
+    - tox -e 'py37-django{200,210,220}'
 
 test_pypy3:
   stage: test
   image: pypy:3-5
   script:
     - pip install tox
-    - tox --skip-missing-interpreters
+    - tox -e 'pypy3-django{111,200,210,220}'
