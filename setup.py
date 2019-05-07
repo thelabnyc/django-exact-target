@@ -1,15 +1,15 @@
-from setuptools import setup, Distribution
+#!/usr/bin/env python
+from setuptools import setup, find_packages, Distribution
+import codecs
+import os.path
 
+# Make sure versiontag exists before going any further
 Distribution().fetch_build_eggs('versiontag')
 
 from versiontag import get_version, cache_git_tag  # NOQA
-import codecs  # NOQA
-import os.path  # NOQA
 
 
-packages = [
-    'exacttarget',
-]
+packages = find_packages('src')
 
 install_requires = [
     'Django>=1.11',
@@ -55,7 +55,9 @@ setup(
     author_email='crgwbr@gmail.com',
     url='https://gitlab.com/thelabnyc/django-exact-target',
     license='ISC',
+    package_dir={'': 'src'},
     packages=packages,
+    include_package_data=True,
     install_requires=install_requires,
     extras_require=extras_require
 )
