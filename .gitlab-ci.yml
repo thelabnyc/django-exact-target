@@ -33,7 +33,7 @@ test_python38:
 
 test_pypy3:
   stage: test
-  image: pypy:3-5
+  image: pypy:3
   script:
     - pip install tox
     - tox -e 'pypy3-django{111,220,300}'
