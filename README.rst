@@ -43,6 +43,10 @@ Resources
 Changelog
 =========
 
+1.0.0
+----------------
+- Update test suite for Django 2.2 and Python 3.8
+
 0.2.0
 ----------------
 - Migrate from Sentry's old SDK (raven) to their new SDK (sentry-sdk).
@@ -53,18 +57,13 @@ Changelog
 - optional errorcode whitelist
     - Exactarget responses with error codes in ET_IGNORED_ERROR_CODES will not throw exceptions
 
-
 0.1.1
 -----------------
 - support for plaintext errors in responses
 
-
 0.1.0
 ------------------
 - Initial release.
-
-
-
 
 
 .. |license| image:: https://img.shields.io/pypi/l/django-exact-target.svg
