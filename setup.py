@@ -12,7 +12,7 @@ from versiontag import get_version, cache_git_tag  # NOQA
 packages = find_packages('src')
 
 install_requires = [
-    'Django>=1.11',
+    'Django>=2.2',
     'sentry-sdk>=0.5.5',
     'requests>=2.9.1',
     'simplejson>=3.8.2',
