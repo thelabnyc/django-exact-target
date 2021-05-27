@@ -43,6 +43,10 @@ Resources
 Changelog
 =========
 
+1.1.0
+----------------
+- Update test suite for Django 3.2
+
 1.0.0
 ----------------
 - Update test suite for Django 2.2 and Python 3.8
