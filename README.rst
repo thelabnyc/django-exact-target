@@ -78,4 +78,3 @@ Changelog
     :target: https://pypi.python.org/pypi/django-exact-target
 .. |downloads| image:: https://img.shields.io/pypi/dm/django-exact-target.svg?maxAge=2592000
     :target: https://pypi.python.org/pypi/django-exact-target
-
