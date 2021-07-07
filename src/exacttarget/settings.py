@@ -10,6 +10,8 @@ def overridable(name, default=None, required=False):
     return getattr(settings, name, default)
 
 
-EXACT_TARGET_CLIENT_ID = overridable('EXACT_TARGET_CLIENT_ID', required=True)
-EXACT_TARGET_CLIENT_SECRET = overridable('EXACT_TARGET_CLIENT_SECRET', required=True)
-ET_IGNORED_ERROR_CODES = overridable('ET_IGNORED_ERROR_CODES', required=False, default=DEFAULT_IGNORED_CODES)
+EXACT_TARGET_CLIENT_ID = overridable("EXACT_TARGET_CLIENT_ID", required=True)
+EXACT_TARGET_CLIENT_SECRET = overridable("EXACT_TARGET_CLIENT_SECRET", required=True)
+ET_IGNORED_ERROR_CODES = overridable(
+    "ET_IGNORED_ERROR_CODES", required=False, default=DEFAULT_IGNORED_CODES
+)
